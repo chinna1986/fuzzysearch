@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="handlebars-v1.3.0.js"></script>
+  </head>
+  <body>
+    <div>Fuzzy search demo</div>
+    <br>
+    <input id="inputSearch" placeholder="Search"></body>
+    <p>Filter by:</p>
+    <input id="author" type="checkbox">author</input>
+    <input id="title" type="checkbox" checked>title</input>
+    <input id="case" type="checkbox">case</input>
+
+    <ul id="results">
+      <script id="template" src="fusedemo.js" type="text/x-handlebars-template"></script>
+    </ul>
+
+  	<script src="jquery.js"></script>
+    <script src="fuse.js"></script>
+    <script src="fuseDemo.js"></script>
+  </body>
+</html>

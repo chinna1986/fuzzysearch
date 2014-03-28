@@ -1,0 +1,12 @@
+{
+	"name": "Fuzzy Search Demo",
+	"description": "demo implemmentation of fuzzy search using fuse.js",
+	"version": "1.0",
+	"app": {
+		"background": {
+			"scripts": ["start.js"]
+		}
+	},
+	"manifest_version": 2,
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}
