@@ -16,10 +16,16 @@ $(function() {
 
     function search() {
       var r = fuse.search($inputSearch.val());
+      console.log("template", $('#result-template').html());
+      var template = Handlebars.compile($('#result-template').html());
+
       $result.empty();
-      $.each(r, function() {
-        $result.append('<li class="result-item">' + this.title + ', <span>' + this.author + '</span></li>');
-    });
+      
+      for(var i = 0; i < r.length; i++){
+        console.log(r[i]);
+        $result.append(template(r[i]));
+      }
+  
     }
 
     function createFuse() {

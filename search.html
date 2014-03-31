@@ -13,6 +13,13 @@
     <input id="case" type="checkbox">case</input>
 
     <ul id="results">
+      <script id="result-template" type="text/x-handlebars-template">   
+        {{#each this}}
+        <li class="result-item"> 
+          {{title}},  
+          <span>{{author}}</span>
+        </li>
+      </script>
     </ul>
 
   	<script src="jquery.js"></script>
