@@ -1,30 +1,61 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="handlebars-v1.3.0.js"></script>
+    <script src="js/handlebars-v1.3.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="style/search.css">
   </head>
   <body>
-    <div>Fuzzy search demo</div>
-    <br>
-    <input id="inputSearch" placeholder="Search"></input>
-    <p>Filter by:</p>
-    <input id="author" type="checkbox">author</input>
-    <input id="title" type="checkbox" checked>title</input>
-    <input id="case" type="checkbox">case</input>
+    <script id="main-template" type="text/x-handlebars-template">
+      <div class="container">
+        <div class"title">Fuzzy search demo</div>
+        <div class="buttons">
+          <button class="show-list-button show-hide on" type="button">Show List</button>
+          <button class="show-list-button edit" type="button">Edit</button>
+          <button class="edit-mode-button save" type="button">Save</button>
+          <button class="edit-mode-button cancel" type="button">Cancel</button>
+        </div>
+        <div id="list-div">
+          <ul id="show-list">
+          </ul>
+        </div>
+        <div>
+        <input id="inputSearch" placeholder="Search"></input>
+        <p>Filter by:</p>
+        <input id="author" type="checkbox">author</input>
+        <input id="title" type="checkbox" checked>title</input>
+        <input id="case" type="checkbox">case</input>
+        <div id="result-div">
+          <ul id="results">
+          </ul>
+        </div>
+        </div>
+      </div>
+    </script>
 
-    <ul id="results">
-      <script id="result-template" type="text/x-handlebars-template">   
-        {{#each this}}
-        <li class="result-item"> 
-          {{title}},  
-          <span>{{author}}</span>
-        </li>
-      </script>
-    </ul>
+    <script id="result-template" type="text/x-handlebars-template">   
+      {{#each this}}
+      <li class="result-item"> 
+        <span><i>{{title}}</i></span>
+        <br>  
+        <span>{{author}}</span>
+      </li>
+      <br>
+      {{/each}}
+    </script>
 
-  	<script src="jquery.js"></script>
-    <script src="fuse.js"></script>
-    <script src="resulttemplates.js"></script>
-    <script src="fuseDemo.js"></script>
+    <script id="entire-list" type="text/x-handlebars-template">
+      {{#each this}}
+      <li class="result-item"> 
+        <span>Title: {{title}}</span>
+        <br>  
+        <span>Author: {{author}}</span>
+      </li>
+      <br>
+      {{/each}}
+    </script>
+    
+  	<script src="js/jquery.js"></script>
+    <script src="js/fuse.js"></script>
+    <script src="js/fuseDemo.js"></script>
   </body>
 </html>
