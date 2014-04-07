@@ -21,35 +21,41 @@
         <div>
         <input id="inputSearch" placeholder="Search"></input>
         <p>Filter by:</p>
-        <input id="author" type="checkbox">author</input>
-        <input id="title" type="checkbox" checked>title</input>
-        <input id="case" type="checkbox">case</input>
+        <div class="checkboxes">
+          <input id="case" type="checkbox">case</input>
+        </div>
         <div id="result-div">
           <ul id="results">
-          </ul>
+          </ul> 
         </div>
         </div>
       </div>
     </script>
 
+    <script id="checkbox-template" type="text/x-handlebars-template">
+      {{#each this}}
+        <input data-filter="{{this}}" class="filter-checkbox {{this}}-checkbox" type="checkbox">{{this}}</input>
+      {{/each}}
+    </script>
+
     <script id="result-template" type="text/x-handlebars-template">   
       {{#each this}}
-      <li class="result-item"> 
-        <span><i>{{title}}</i></span>
-        <br>  
-        <span>{{author}}</span>
-      </li>
-      <br>
+        <li class="search-result-item"> 
+          <span>{{title}}</span>
+          <br>  
+          <span>{{author}}</span>
+        </li>
+        <br>
       {{/each}}
     </script>
 
     <script id="entire-list" type="text/x-handlebars-template">
       {{#each this}}
-      <li class="result-item"> 
-        <span>Title: {{title}}</span>
-        <br>  
-        <span>Author: {{author}}</span>
-      </li>
+        <li class="result-item"> 
+          <span>Title: {{title}}</span>
+          <br>  
+          <span>Author: {{author}}</span>
+        </li>
       <br>
       {{/each}}
     </script>

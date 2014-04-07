@@ -1,0 +1,65 @@
+[
+{
+	"Model": "iPhone 5s",
+	"Manufacturer": "Apple",
+	"Operating System": "iOS 7",
+	"Storage": "16, 32, 64",
+	"Exapandable Storage": "No"
+},
+{
+	"Model": "iPhone 5c",
+	"Manufacturer": "Apple",
+	"Operating System": "iOS 7",
+	"Storage": "16, 32, 64",
+	"Exapandable Storage": "No"
+},
+{
+	"Model": "iPhone 4s",
+	"Manufacturer": "Apple",
+	"Operating System": "iOS 5",
+	"Storage": "16, 32, 64",
+	"Exapandable Storage": "No"
+},
+{
+	"Model": "Nexus 5",
+	"Manufacturer": "LG",
+	"Operating System": "Android 4.4.2",
+	"Storage": "16, 32",
+	"Exapandable Storage": "No"
+},
+{
+	"Model": "BlackBerry Q10",
+	"Manufacturer": "BlackBerry",
+	"Operating System": "BlackBerry 10.1",
+	"Storage": "16",
+	"Exapandable Storage": "Yes"
+},
+{
+	"Model": "Samsung Galaxy S5",
+	"Manufacturer": "Samsung",
+	"Operating System": "Android 4.4.2",
+	"Storage": "16, 32",
+	"Exapandable Storage": "Yes"
+},
+{
+	"Model": "Samsung Galaxy S4",
+	"Manufacturer": "Samsung",
+	"Operating System": "Android 4.2.2",
+	"Storage": "16, 32",
+	"Exapandable Storage": "Yes"
+},
+{
+	"Model": "Samsung Galaxy Note 3",
+	"Manufacturer": "Samsung",
+	"Operating System": "Android 4.3",
+	"Storage": "16, 32",
+	"Exapandable Storage": "Yes"
+},
+{
+	"Model": "Nokia Lumia 1020",
+	"Manufacturer": "Nokia",
+	"Operating System": "Windows Phone 8",
+	"Storage": "16, 32",
+	"Exapandable Storage": "No"
+}
+]

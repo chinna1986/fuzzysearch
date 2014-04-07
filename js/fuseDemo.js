@@ -1,64 +1,65 @@
 
 $(function() {
-  function start(books) {
+  function start(collection) {
     var $inputSearch = $('#inputSearch'),
         $result = $('#results'),
 
-        $authorCheckbox = $('#author'),
-        $titleCheckbox = $('#title'),
         $caseCheckbox = $('#case'),
+        filterCheckbox = $('.filter-checkbox'),
 
         $showList = $('.buttons .show-hide'),
         $edit = $('.buttons .edit'),
         $save = $('.buttons .save'),
         $cancel = $('.buttons .cancel'),
 
-        searchAuthors = false,
-        searchTitles = true,
         isCaseSensitive = false,
         entireListActive = false,
         editModeOn = false,
 
         resultTemplate = Handlebars.compile($('#result-template').html()),
         entireListTemplate = Handlebars.compile($('#entire-list').html()),
+        checklistTemplate = Handlebars.compile($('#checkbox-template').html()),
+      
+        stringJSON = JSON.stringify(collection, null, 4),
 
-        stringJSON = JSON.stringify(books, null, 4),
+        filters = Object.keys(collection[0]),
+        checkboxChecked = [],
 
         fuse;
 
     function search() {
       var r = fuse.search($inputSearch.val());
+          // resultsObject = {
+          //   results: r,
+          //   keys: filters
+          // };
     
       console.log("searching..")
 
       $result.html(resultTemplate(r));
+
+      console.log(r);
+      // console.log("resultObject results: ", resultsObject.results);
+      // console.log("resultObject keys: ", resultsObject.keys);
     }
 
     function createFuse() {
       var keys = [];
-      if (searchAuthors) {
-        keys.push('author');
-      }
-      if (searchTitles) {
-        keys.push('title');
-      }
+      var $filterCheckboxes = $('.filter-checkbox');
+
+      console.log("creating fuse...");
+
+      $filterCheckboxes.each(function(){
+        var $this = $(this);
+        if($this.prop('checked')){
+          keys.push($this.data('filter'));
+        }
+      });
       console.log('fuse keys', keys);
-      fuse = new Fuse(books, {
+      fuse = new Fuse(collection, {
         keys: keys,
         caseSensitive: isCaseSensitive
       });
-    }
-
-    function onAuthorCheckboxChanged() {
-      searchAuthors= $authorCheckbox.prop('checked');
-      createFuse();
-      search();
-    }
-
-    function onTitleCheckboxChanged() {
-      searchTitles = $titleCheckbox.prop('checked');
-      createFuse();
-      search();
     }
 
     function onCaseCheckboxChanged() {
@@ -87,7 +88,7 @@ $(function() {
     function onSaveButtonPress(){
       editModeOn = !editModeOn;
       stringJSON = $('.edit-box').val();
-      books = JSON.parse(stringJSON);
+      collection = JSON.parse(stringJSON);
       createFuse();
       editButtonStatus();
       console.log("edit mode on: ", editModeOn);
@@ -98,8 +99,8 @@ $(function() {
         console.log("show list pressed..");
         $showList.html("Hide List");
         $edit.toggleClass('on');
-        $('#show-list').append(entireListTemplate(books));
-        console.log(books);
+        $('#show-list').append(entireListTemplate(collection));
+        console.log(collection);
       }
       else{
         console.log("hide list pressed..");
@@ -113,12 +114,12 @@ $(function() {
         if(editModeOn){
           $('#list-div').replaceWith('<textarea class="edit-box" />');
           $('.edit-box').val(stringJSON);
-          console.log(books);
+          console.log(collection);
         }
         else{
           $('.edit-box').replaceWith('<div id="list-div" />');
           $('#list-div').append('<ul id="show-list" />');
-          $('#show-list').append(entireListTemplate(books));
+          $('#show-list').append(entireListTemplate(collection));
         }
         $edit.toggleClass('on');
         $save.toggleClass('on');
@@ -126,16 +127,23 @@ $(function() {
         $showList.toggleClass('on');
     }
 
-    (function(){
+    function onFilterCheckboxChanged () {
+      var $this = $(this);
+      var filterValue = $this.data('filter');
+      $this.prop('checked');
+      createFuse();
+      search();
+    }
 
+    (function(){
+      $('.checkboxes').prepend(checklistTemplate(filters));
     })();
 
-    $authorCheckbox.on('change', onAuthorCheckboxChanged);
-    $titleCheckbox.on('change', onTitleCheckboxChanged);
     $caseCheckbox.on('change', onCaseCheckboxChanged);
 
     $inputSearch.on('keyup', search);
 
+    $('.filter-checkbox').on('change', onFilterCheckboxChanged);
     $showList.on('click', onListButtonPress);
     $edit.on('click', onEditButtonPress);
     $cancel.on('click', onCancelButtonPress);
