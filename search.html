@@ -3,30 +3,36 @@
   <head>
     <script src="js/handlebars-v1.3.0.js"></script>
     <link rel="stylesheet" type="text/css" href="style/search.css">
+    <link href="style/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
     <script id="main-template" type="text/x-handlebars-template">
       <div class="container">
-        <div class"title">Fuzzy search demo</div>
-        <div class="buttons">
-          <button class="show-list-button show-hide on" type="button">Show List</button>
-          <button class="show-list-button edit" type="button">Edit</button>
-          <button class="edit-mode-button save" type="button">Save</button>
-          <button class="edit-mode-button cancel" type="button">Cancel</button>
-        </div>
-        <div id="list-div">
-          <ul id="show-list">
-          </ul>
-        </div>
-        <div>
-        <input id="inputSearch" placeholder="Search"></input>
-        <p>Filter by:</p>
-        <div class="checkboxes">
-          <input id="case" type="checkbox">case</input>
-        </div>
-        <div id="result-div">
-          <ul id="results">
-          </ul> 
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4">
+            <div class="title">Fuzzy Search Demo</div>
+            <div class="buttons">
+              <button class="show-list-button show-hide on btn btn-primary" type="button">Show List</button>
+              <button class="show-list-button edit btn btn-default" type="button">Edit</button>
+              <button class="edit-mode-button save btn btn-success" type="button">Save</button>
+              <button class="edit-mode-button cancel btn btn-danger" type="button">Cancel</button>
+            </div>
+            <div id="list-div">
+              <ul id="show-list">
+              </ul>
+            </div>
+            <div class="form-group">
+            <input id="inputSearch" class="form-control" placeholder="Search"></input>
+            <div id="result-div">
+              <ul id="results">
+              </ul> 
+            </div>
+            <p class="filter-by">Filter by:</p>
+            <div class="checkboxes">
+              <span class="case-checkbox checkbox-span"><input id="case" type="checkbox">Case</input></span>
+            </div>
+            </div>
+            </div>
         </div>
         </div>
       </div>
@@ -34,34 +40,35 @@
 
     <script id="checkbox-template" type="text/x-handlebars-template">
       {{#each this}}
-        <input data-filter="{{this}}" class="filter-checkbox {{this}}-checkbox" type="checkbox">{{this}}</input>
+        <span class="{{this}}-checkbox checkbox-span"><input data-filter="{{this}}" class="filter-checkbox" type="checkbox"><span>{{this}}</span></input></span>
       {{/each}}
     </script>
 
     <script id="result-template" type="text/x-handlebars-template">   
-      {{#each this}}
+      {{#each results}}
         <li class="search-result-item"> 
-          <span>{{title}}</span>
-          <br>  
-          <span>{{author}}</span>
+          {{#each this}}
+            <span>{{@key}}: {{this}}</span>
+            <br>
+          {{/each}} 
         </li>
-        <br>
-      {{/each}}
+      {{/each}} 
     </script>
 
     <script id="entire-list" type="text/x-handlebars-template">
-      {{#each this}}
-        <li class="result-item"> 
-          <span>Title: {{title}}</span>
-          <br>  
-          <span>Author: {{author}}</span>
+      {{#each objects}}
+        <li class="result-item">
+          {{#each this}}
+            <span>{{@key}}: {{this}}</span>
+            <br>
+          {{/each}} 
         </li>
-      <br>
-      {{/each}}
+      {{/each}} 
     </script>
     
   	<script src="js/jquery.js"></script>
     <script src="js/fuse.js"></script>
     <script src="js/fuseDemo.js"></script>
+    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
