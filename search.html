@@ -22,25 +22,27 @@
               </ul>
             </div>
             <div class="form-group">
-            <input id="inputSearch" class="form-control" placeholder="Search"></input>
+              <input id="inputSearch" class="form-control" placeholder="Search"></input>
+              <p class="filter-by">Filter by:</p>
+              <div class="checkboxes"></div>
+            </div>
+            <div class="fixed-buttons">
+              <button class="btn btn-info" id="case">Enable Case Sensitivity</button>
+              <button class="btn btn-info" id="all">Enable All Filters</button>
+            </div>
             <div id="result-div">
+              <div class="search-result-title"><p>Search Results:</p></div>
               <ul id="results">
               </ul> 
             </div>
-            <p class="filter-by">Filter by:</p>
-            <div class="checkboxes">
-              <span class="case-checkbox checkbox-span"><input id="case" type="checkbox">Case</input></span>
-            </div>
-            </div>
-            </div>
-        </div>
+          </div>
         </div>
       </div>
     </script>
 
     <script id="checkbox-template" type="text/x-handlebars-template">
       {{#each this}}
-        <span class="{{this}}-checkbox checkbox-span"><input data-filter="{{this}}" class="filter-checkbox" type="checkbox"><span>{{this}}</span></input></span>
+        <span class="checkbox-span"><input data-filter="{{this}}" class="{{this}}-checkbox filter-checkbox" type="checkbox"><span>{{this}}</span></input></span>
       {{/each}}
     </script>
 
@@ -55,7 +57,7 @@
       {{/each}} 
     </script>
 
-    <script id="entire-list" type="text/x-handlebars-template">
+    <script id="entire-list-template" type="text/x-handlebars-template">
       {{#each objects}}
         <li class="result-item">
           {{#each this}}

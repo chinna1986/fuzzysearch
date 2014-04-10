@@ -4,22 +4,23 @@ $(function() {
     var $inputSearch = $('#inputSearch'),
         $result = $('#results'),
 
-        $caseCheckbox = $('#case'),
-        filterCheckbox = $('.filter-checkbox'),
-
+        $caseButton = $('#case'),
         $showList = $('.buttons .show-hide'),
         $edit = $('.buttons .edit'),
         $save = $('.buttons .save'),
         $cancel = $('.buttons .cancel'),
+        $all = $('#all'),
         $resultDiv = $('#result-div'),
+        $resultTitle = $('.search-result-title'),
 
-        isCaseSensitive = false,
+        caseEnabled = false,
+        searchAllEnabled = false,
         entireListActive = false,
         editModeOn = false,
         showSearchResults = false,
 
         resultTemplate = Handlebars.compile($('#result-template').html()),
-        entireListTemplate = Handlebars.compile($('#entire-list').html()),
+        entireListTemplate = Handlebars.compile($('#entire-list-template').html()),
         checklistTemplate = Handlebars.compile($('#checkbox-template').html()),
       
         stringJSON = JSON.stringify(collection, null, 4),
@@ -33,18 +34,13 @@ $(function() {
         fuse;
 
     function search() {
-      var r = fuse.search($inputSearch.val());
+      var r = fuse.search($inputSearch.val()),
           resultsObject = {
             results: r,
             keys: filters
           };
 
-      if(r.length === 0){
-        showSearchResults = false;
-      }
-      else{
-        showSearchResults = true;
-      }
+      showSearchResults = !!r.length;
 
       console.log("show search results", showSearchResults);
 
@@ -55,22 +51,20 @@ $(function() {
       $result.html(resultTemplate(resultsObject));
 
       console.log(r);
-      // console.log("resultObject results: ", resultsObject.results);
-      // console.log("resultObject keys: ", resultsObject.keys);
     }
 
     function showResultStatus(){
       if(showSearchResults){
         if(!$resultDiv.hasClass('show-search-results')){
           $resultDiv.addClass('show-search-results');
-          $inputSearch.addClass('show-search-results');
+          $resultTitle.addClass('show-search-results');
           console.log("class added");
         }
       }
       else{
         if($resultDiv.hasClass('show-search-results')){
           $resultDiv.removeClass('show-search-results');
-          $inputSearch.removeClass('show-search-results');
+          $resultTitle.removeClass('show-search-results');
           console.log("class removed");
         }
       }
@@ -89,20 +83,17 @@ $(function() {
           keys.push($this.data('filter'));
         }
       });
+
       console.log('fuse keys', keys);
+      console.log("fuse case sensitive: ", caseEnabled);
+
       fuse = new Fuse(collection, {
         keys: keys,
-        caseSensitive: isCaseSensitive
+        caseSensitive: caseEnabled
       });
     }
 
-    function onCaseCheckboxChanged() {
-      isCaseSensitive = $caseCheckbox.prop('checked');
-      createFuse();
-      search();
-    }
-
-    function onFilterCheckboxChanged () {
+    function onFilterCheckboxChanged(){
       var $this = $(this),
           filterValue = $this.data('filter');
 
@@ -136,6 +127,59 @@ $(function() {
       editButtonStatus();
       search();
       console.log("edit mode on: ", editModeOn);
+    }
+
+    function onCaseButtonPress() {
+      caseEnabled = !caseEnabled;
+      toggleButtonState($caseButton, caseEnabled, 'Disable Case Sensitivity', 'Enable Case Sensitivity');
+      createFuse();
+      search();
+    }
+
+    function onAllButtonPress(){
+      searchAllEnabled = !searchAllEnabled;
+      console.log("search all enabled: ", searchAllEnabled);
+      toggleButtonState($all, searchAllEnabled, 'Disable All Filters', 'Enable All Filters');
+      allButtonState();
+      createFuse();
+      search();
+    }
+
+    function toggleButtonState(button, buttonState, enabledButtonString, disabledButtonString){
+      if(buttonState){
+        button.html(enabledButtonString);
+        if(button.hasClass('btn-info')){
+          button.removeClass('btn-info');
+        }
+        button.addClass('btn-danger');
+      }
+      else{
+        button.html(disabledButtonString);
+        if(button.hasClass('btn-danger')){
+          button.removeClass('btn-danger');
+        }
+        button.addClass('btn-info');
+      }
+    }
+
+    function allButtonState(){
+      if(searchAllEnabled){
+        $('.filter-checkbox').each(function(){
+          if(! $(this).prop('checked')){
+            console.log("checking ", $(this));
+            $(this).prop('checked', true);
+          }
+          console.log($(this), " checked: ", $(this).is(':checked'));
+        });
+      }
+      else{
+        $('.filter-checkbox').each(function(){
+          if($(this).prop('checked')){
+            console.log("unchecking ", $(this));
+            $(this).prop('checked', false);
+          }
+        });
+      }
     }
 
     function listButtonState(){
@@ -173,17 +217,16 @@ $(function() {
         $showList.toggleClass('on');
     }
 
-    (function(){
-      $('.checkboxes').prepend(checklistTemplate(filters));
-    })();
+    $('.checkboxes').prepend(checklistTemplate(filters));
 
-    $caseCheckbox.on('change', onCaseCheckboxChanged);
     $inputSearch.on('keyup', search);
     $('.filter-checkbox').on('change', onFilterCheckboxChanged);
     $showList.on('click', onListButtonPress);
     $edit.on('click', onEditButtonPress);
     $cancel.on('click', onCancelButtonPress);
     $save.on('click', onSaveButtonPress);
+    $caseButton.on('click', onCaseButtonPress);
+    $all.on('click', onAllButtonPress);
 
     console.log('about to create fuse');
     createFuse();
