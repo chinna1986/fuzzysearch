@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+
+      <div class="title">Fuzzy Search Demo</div>
+
+        <div class="buttons">
+          <button class="show-list-button show-hide on btn btn-primary" type="button">Show List</button>
+          <button class="show-list-button edit btn btn-default" type="button">Edit</button>
+          <button class="edit-mode-button save btn btn-success" type="button">Save</button>
+          <button class="edit-mode-button cancel btn btn-danger" type="button">Cancel</button>
+        </div>
+
+        <div id="list-div">
+          <ul id="show-list">
+          </ul>
+        </div>
+
+        <div class="form-group">
+          <input id="inputSearch" class="form-control" placeholder="Search"></input>
+          <p class="filter-by">Filter by:</p>
+          <div class="checkboxes"></div>
+        </div>
+
+        <div class="fixed-buttons">
+          <button class="btn btn-info btn-search-option" id="all-on">Select All Filters</button>
+          <button class="btn btn-info btn-search-option" id="all-off">Unselect All Filters</button>
+          <button class="btn btn-info btn-search-option" id="case">Enable Case Sensitivity</button>
+        </div>
+
+        <div id="result-div">
+          <div class="search-result-title"><p>Search Results:</p></div>
+          <ul id="results">
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>

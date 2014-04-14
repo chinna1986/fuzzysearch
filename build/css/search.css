@@ -1,0 +1,80 @@
+ul{
+	list-style-type: none;
+	font-size: 15px;
+	padding: 0px;
+}
+
+.title{
+	font-size: 30px;
+	text-align: center;
+	padding: 15px;
+}
+
+#inputSearch{
+	padding-bottom: 0px;
+}
+
+.filter-by{
+	text-align: center;
+	padding: 10px 0;
+	margin: 0px;
+}
+
+div .buttons, div .checkboxes, div .fixed-buttons{
+	text-align: center;
+}
+
+.buttons .edit-mode-button.on, .buttons .show-list-button.on {
+	display: inline;
+}
+
+.buttons .show-list-button, .buttons .edit-mode-button {
+	display: none;
+}
+
+div #list-div{
+	margin: 15px 0;
+}
+
+div #result-div, #results, #show-list{
+	margin: 0px;
+	padding: 0px;
+}
+
+.search-result-item, .result-item{
+	padding: 10px;
+}
+
+.search-result-item:hover{
+	background-color: #5bc0de;
+	color: white;
+}
+
+.search-result-title{
+	display: inline;
+	text-align: center;
+}
+
+#result-div{
+	display: none;
+}
+
+#list-div, #results, .edit-box{
+	width: 100%;
+	max-height: 200px;
+	overflow-y: auto; 
+}
+
+.checkbox-span{
+	padding: 5px 10px;
+}
+
+.edit-box{
+	height: 200px;
+	margin: 10px 0;
+	padding: 0px;
+}
+
+.btn-search-option{
+	margin: 5px 0;
+}
