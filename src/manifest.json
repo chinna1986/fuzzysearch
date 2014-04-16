@@ -1,6 +1,6 @@
 {
 	"name": "Fuzzy Search Demo",
-	"description": "demo implemmentation of fuzzy search using fuse.js",
+	"description": "A demo of fuzzy search using fuse.js",
 	"version": "1.0",
 	"app": {
 		"background": {

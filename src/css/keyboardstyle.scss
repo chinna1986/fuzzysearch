@@ -1,0 +1,32 @@
+.keyboard {
+  width: 100%;
+  margin: 15px 0 0 0;
+  padding: 0;
+  color: black;
+  list-style: none;
+  li {
+    float: left;
+    margin: 0 5px 5px 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background: #fff;
+    text-align: center;
+    line-height: 40px; }
+  .capslock, .tab, .left-shift, .hide-keyboard { clear: left; }
+  .tab, .delete, .hide-keyboard { width: 70px; }
+  .capslock { width: 80px; }
+  .return { width: 77px; }
+  .left-shift { width: 95px; }
+  .right-shift { width: 109px; }
+  .lastitem { margin-right: 0; }
+  .uppercase { text-transform: uppercase; }
+  .space { width: 500px; }
+  .on { display: none; }
+  .return {
+    border-color: #00adff;
+    background: #00adff;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.29);
+    font-weight: bold; } }

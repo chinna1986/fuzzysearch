@@ -1,0 +1,75 @@
+.fuzzysearch{
+	.title{
+		font-size: 30px;
+		padding: 15px;
+	}
+
+	#inputSearch{
+		padding-bottom: 0px;
+	}
+
+	div .buttons, div .checkboxes, div .fixed-buttons, .filter-by, .search-result-title, .title, div .keyboard-div{
+		text-align: center;
+	}
+
+	ul{
+		list-style-type: none;
+		font-size: 15px;
+		padding: 0px;
+	}
+
+	#list-div, #results, .edit-box{
+		width: 100%;
+		max-height: 200px;
+		overflow-y: auto; 
+	}
+
+	div #list-div{
+		margin: 15px 0;
+	}
+
+	.edit-box{
+		height: 200px;
+		margin: 10px 0;
+		padding: 0px;
+	}
+
+	div #result-div, #results, #show-list{
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.filter-by{
+		padding: 10px 0;
+		margin: 0px;
+	}
+
+	.checkbox-span{
+		padding: 5px 10px;
+	}
+
+	.buttons .edit-mode-button.on, .buttons .show-list-button.on, .search-result-title {
+		display: inline;
+	}
+
+	.keyboard-col{
+		width: 100%;
+	}
+
+	.buttons .show-list-button, .buttons .edit-mode-button, #result-div{
+		display: none;
+	}
+
+	.search-result-item, .result-item{
+		padding: 10px;
+	}
+
+	.search-result-item:hover{
+		background-color: #5bc0de;
+		color: white;
+	}
+
+	.btn-search-option{
+		margin: 5px 0;
+	}
+}

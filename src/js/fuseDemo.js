@@ -165,10 +165,18 @@ $(function() {
         $showList.toggleClass('on');
     }
 
+    function pullKeyboardUp(){
+      $('.keyboard').toggle(true);
+    }
+
     $('.checkboxes').prepend(fuzzySearch.templates.checkbox(filters));
 
-
     $('#inputSearch').on('keyup', search);
+    $('#inputSearch').on('click', pullKeyboardUp);
+
+    $('.keyboard li').on('mousedown', type);
+    $('.keyboard li').on('mouseup', search);
+
     $('.filter-checkbox').on('change', onFilterCheckboxChanged);
 
     $showList.on('click', onListButtonPress);
@@ -186,6 +194,7 @@ $(function() {
 
   $.getJSON('assets/phones.json', function(data) {
     $('body').prepend(fuzzySearch.templates.body);
+    $('.keyboard-div').append(fuzzySearch.templates.keyboard);
     start(data);
   });
 });
